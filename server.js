@@ -55,6 +55,14 @@ express()
     const getBotMessage = (text) => {
       const commonGreetings = ["hi", "hello", "howdy", "greetings"];
       const commonGoodbyes = ["bye", "see ya", "later", "ciao"];
+      const jokesArray = [
+        `\nQ. What's the difference between a dog and a businessman?\n\nA. The businessman usually wears a three-piece suit, you know, with a jacket and a shirt and a tie,\nand the dog.... just pants.`,
+        `\nQ. What's the difference between a stylish person on a unicycle and a poorly dressed person on a bicycle? \n\nA. A tire (attire :P)`,
+        "\nA perfectionist walked into a bar... \napparently, the bar wasn’t set high enough.",
+        "\nI own the world's worst thesaurus. \nNot only is it awful, it's awful.",
+        "\nQ. What's the difference between a good joke and a bad joke timing.",
+        `\nQ. Why don't kleptomaniacs have a sense of humor?\n\nThey take everything... literally.`,
+      ];
       let botMsg = text;
       commonGreetings.forEach((greeting) => {
         console.log(text.toLowerCase().includes(greeting));
@@ -68,6 +76,19 @@ express()
           botMsg = "Goodbye!";
         }
       });
+      if (text.toLowerCase().includes("something funny")) {
+        botMsg = "Do you want to hear a joke?\nReply Y or N";
+      }
+      if (text === "Y") {
+        const randomIndex = Math.floor(Math.random() * 6);
+        botMsg =
+          `${jokesArray[randomIndex]}` +
+          "\n\nDo you want to hear another?\nReply Y or N";
+      }
+      if (text === "N") {
+        botMsg = "Goodbye!";
+      }
+
       return botMsg;
     };
 
